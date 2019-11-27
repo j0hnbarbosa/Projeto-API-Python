@@ -26,7 +26,7 @@ def cadastraUsuario():
 @app.route('/recuperarSenhaVerificaEmail', methods=['GET'])
 def recuperarSenhaVerificaEmail():
   recuperarSenha_verificaEmail(request.json)
-  return 'sucesso - recuperarSenhaVerificaEmail'
+  return jsonify(recuperarSenha_verificaEmail(request.json))
 
 #Quando estiver usando o app.run(debug=True) execute usando 'python app.py'
 if __name__ == '__main__':

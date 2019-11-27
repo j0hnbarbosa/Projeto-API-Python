@@ -130,12 +130,13 @@ except:
 
 try:
   def recuperarSenha_verificaEmail(valores):
-    sql = "SELECT * from `traba_db`.`tbl_usuario` where email=%s"
-    vlr = (valores['email'])
-
-    mycursor.execute(sql, vlr)
-    print("Valores da base {}".format(mycursor.fetchone()))
-    terminaConexao()
+    print("valores {}".format(valores['email']))
+    sql = "SELECT * from `traba_db`.`tbl_usuario` where 1=1 and email='{}'".format(valores['email'])
+    print(sql)
+    mycursor.execute(sql)
+    resu = mycursor.fetchone()
+    terminaConexao()    
+    return resu
 except:
   print('Dados não inseridos')
 
