@@ -1,0 +1,14 @@
+# 1 - renomeie esse arquivo para conexao.py
+
+# 2 - preencha as informacoes com os dados de acesso a sua base mysql ou algma outra base tu uses.
+
+import mysql.connector
+
+def conectaDB():
+  mydb = mysql.connector.connect(
+  host="",
+  user="",
+  passwd="") 
+
+  print("CONECTADO!")
+  return mydb
