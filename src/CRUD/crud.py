@@ -99,12 +99,14 @@ except:
 
 try:
   def verificaLogin(valores):
-    sql = "SELECT * from `traba_db`.`tbl_cliente` where email=%s and senha=%s"
+    sql = "SELECT * from `traba_db`.`tbl_usuario` where email=%s and senha=%s"
     vlr = (valores['email'], valores['senha'])
-
     mycursor.execute(sql, vlr)
-    print("Valores da base {}".format(mycursor.fetchone()))
+    # print("Valores da base {}".format(mycursor.fetchone()))
+    # resu = mycursor.fetchone()
+    print(mycursor.fetchone())
     terminaConexao()
+    return 'resu545454545'
 except:
   print('Dados não inseridos')
 
@@ -119,7 +121,7 @@ except:
   print('Dados não inseridos')
 
 try:
-  def recuperarSenha(valores):
+  def trocarSenha(valores):
     sql = "UPDATE `traba_db`.`tbl_usuario` SET senha=%s where id=%s"
     vlr = (valores['nome'], valores['email'], valores['senha'])
     print("Valores da base {}".format(vlr))
@@ -130,6 +132,7 @@ except:
 
 try:
   def recuperarSenha_verificaEmail(valores):
+    
     print("valores {}".format(valores['email']))
     sql = "SELECT * from `traba_db`.`tbl_usuario` where 1=1 and email='{}'".format(valores['email'])
     print(sql)
