@@ -1,4 +1,4 @@
-from src.CRUD.crud import cadastrarCliente, criaBases, verificaLogin, cadastrarUsuario, recuperarSenha_verificaEmail, trocarSenha, listarClientes
+from src.CRUD.crud import cadastrarCliente, criaBases, verificaLogin, cadastrarUsuario, recuperarSenha_verificaEmail, trocarSenha, listarClientes, listarVeiculos, cadastrarVeiculos, deletarCliente, deletarVeiculo, editarCliente
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -22,7 +22,7 @@ def login():
 @app.route('/cadastrarUsuario', methods=['POST'])
 def cadastraUsuario():
   cadastrarUsuario(request.json)
-  return 'sucesso - cadastrarUsuario'
+  return 'sucesso'
 
 @app.route('/trocarSenha', methods=['GET'])
 def trocaSenha():
@@ -36,8 +36,8 @@ def recuperarSenhaVerificaEmail():
 
 @app.route('/cadastrarVeiculo', methods=['POST'])
 def cadastrarVeiculo():
-  
-  return 'TEste cadastrarVeiculo'
+  cadastrarVeiculos(request.json)
+  return "Sucesso cadastrarVeiculo"
 
 @app.route('/listarCliente', methods=['GET'])
 def listarCliente():
@@ -45,16 +45,25 @@ def listarCliente():
 
 @app.route('/listarVeiculo', methods=['GET'])
 def listarVeiculo():
-  
-  return 'TEste listarVeiculo'
+  return jsonify(listarVeiculos())
 
-@app.route('/editarCliente', methods=['PUT'])
-def editarCliente():
-  return 'TEste editarCliente'
+@app.route('/editarCliente/<id>', methods=['PUT'])
+def editaCliente(id):
+  return editarCliente(request.json, id)
 
 @app.route('/editarVeiculo', methods=['PUT'])
 def editarVeiculo():
   return 'TEste editarVeiculo'
+
+@app.route('/deletarCliente', methods=['DELETE'])
+def deletaCliente():
+  deletarCliente(request.json)
+  return "Cliente Deletado!"
+
+@app.route('/deletarVeiculo', methods=['DELETE'])
+def deletaVeiculo():
+  deletarVeiculo(request.json)
+  return "Veiculo Deletado!"
 
 
 #Quando estiver usando o app.run(debug=True) execute usando 'python app.py'

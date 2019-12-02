@@ -73,13 +73,15 @@ except:
   print('Dados não inseridos')
 
 try:
-  def cadastrarVeiculo(valores):
-    marca, fabricante, ano, chassis, cor = list(valores.values())
+  def cadastrarVeiculos(valores):
+
     sql = "INSERT INTO `traba_db`.`tbl_veiculo` (`marca`, `fabricante`, `ano`, `chassis`, `cor`) VALUES(%s, %s, %s, %s, %s)"
-    vlr = (marca, fabricante, ano, chassis, cor)
+    vlr = (valores['marca'], valores['fabricante'], valores['ano'], valores['chassis'], valores['cor'])
+    print("clienteNovo: {}".format(vlr))
 
     mycursor.execute(sql, vlr)
     terminaConexao()
+
     print("Dados criados com sucesso")
 except:
   print('Dados não inseridos')
@@ -106,7 +108,7 @@ try:
     # resu = mycursor.fetchone()
     print(mycursor.fetchone())
     terminaConexao()
-    return 'resu545454545'
+    return 'sucesso'
 except:
   print('Dados não inseridos')
 
@@ -146,6 +148,7 @@ except:
 
 try:
   def listarClientes():
+    
     sql = "SELECT * from `traba_db`.`tbl_cliente` where 1=1"
     # print(sql)
     mycursor.execute(sql)
@@ -165,6 +168,66 @@ try:
 except:
   print('Dados não inseridos')
 
+
+try:
+  def listarVeiculos():
+    sql = "SELECT * from `traba_db`.`tbl_veiculo` where 1=1"
+    # print(sql)
+    mycursor.execute(sql)
+    resu = mycursor.fetchall()
+    terminaConexao()
+    resuThat = []
+    
+    field_names = [i[0] for i in mycursor.description]
+
+    for l in resu:
+      temp = {}
+      for index, j in enumerate(l):
+        temp[field_names[index]] = j
+      resuThat.append(temp)
+    
+    print(resuThat)
+
+    return resuThat
+except:
+  print('Dados não inseridos')
+
+
+try:
+  def deletarCliente(valores):
+    print(valores)
+    sql = "DELETE from `traba_db`.`tbl_cliente` where id={0}".format(valores['id'])
+    # vlr = (valores['id'])
+    mycursor.execute(sql)
+    terminaConexao()
+except:
+  print("Dados apagados!")
+  
+try:
+  def deletarVeiculo(valores):
+    print(valores)
+    sql = "DELETE from `traba_db`.`tbl_veiculo` where id={0}".format(valores['id'])
+    # vlr = (valores['id'])
+    mycursor.execute(sql)
+    terminaConexao()
+except:
+  print("Dados apagados!")
+
+
+def editarCliente(valores, id):
+  print(valores)
+  try:
+    sql = "UPDATE TABLE `traba_db`.`tbl_cliente` SET `nome`=%s, `sobrenome`=%s, `endereco`=%s, `telefone`=%s, `cpf`=%s, `email`=%s, `senha`=%s where id=%s"
+    vlr = (valores['nome'], valores['sobrenome'], valores['endereco'], valores['telefone'], valores['cpf'], valores['email'], valores['senha'], id)
+    print("clienteNovo: {}".format(vlr))
+
+    mycursor.execute(sql, vlr)
+    terminaConexao()
+    return "sucesso"
+
+  except:
+    print("ERRO na EDICAO.")
+    return "ERRO na EDICAO."
 
 # donoVeiculoNovo = {}
 # donoVeiculoNovo['idCliente'] = 14
