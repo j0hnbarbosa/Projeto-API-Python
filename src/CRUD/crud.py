@@ -217,9 +217,11 @@ except:
 def editarCliente(valores, id):
   print(valores)
   try:
-    sql = "UPDATE TABLE `traba_db`.`tbl_cliente` SET `nome`=%s, `sobrenome`=%s, `endereco`=%s, `telefone`=%s, `cpf`=%s, `email`=%s, `senha`=%s where id=%s"
-    vlr = (valores['nome'], valores['sobrenome'], valores['endereco'], valores['telefone'], valores['cpf'], valores['email'], valores['senha'], id)
-    print("clienteNovo: {}".format(vlr))
+    sql = "UPDATE `traba_db`.`tbl_cliente` SET `nome`=%s, `sobrenome`=%s, `endereco`=%s, `telefone`=%s, `cpf`=%s, `email`=%s, `senha`=%s where id=%s"
+    vlr = (valores['nome'], valores['sobrenome'], valores['endereco'], valores['telefone'], valores['cpf'], valores['email'], valores['senha'], int(id))
+    # sql = "UPDATE `traba_db`.`tbl_cliente` SET `nome`=%s where id=%s"
+    # vlr = (valores['nome'], valores['id'])
+    # print("clienteNovo: {}".format(vlr))
 
     mycursor.execute(sql, vlr)
     terminaConexao()
