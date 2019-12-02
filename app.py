@@ -1,4 +1,4 @@
-from src.CRUD.crud import cadastrarCliente, criaBases, verificaLogin, cadastrarUsuario, recuperarSenha_verificaEmail, trocarSenha
+from src.CRUD.crud import cadastrarCliente, criaBases, verificaLogin, cadastrarUsuario, recuperarSenha_verificaEmail, trocarSenha, listarClientes
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -41,7 +41,7 @@ def cadastrarVeiculo():
 
 @app.route('/listarCliente', methods=['GET'])
 def listarCliente():
-  return 'TEste listarCliente'
+  return jsonify(listarClientes())
 
 @app.route('/listarVeiculo', methods=['GET'])
 def listarVeiculo():
