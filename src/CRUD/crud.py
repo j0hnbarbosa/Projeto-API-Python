@@ -192,7 +192,6 @@ try:
 except:
   print('Dados não inseridos')
 
-
 try:
   def deletarCliente(valores):
     print(valores)
@@ -219,6 +218,23 @@ def editarCliente(valores, id):
   try:
     sql = "UPDATE `traba_db`.`tbl_cliente` SET `nome`=%s, `sobrenome`=%s, `endereco`=%s, `telefone`=%s, `cpf`=%s, `email`=%s, `senha`=%s where id=%s"
     vlr = (valores['nome'], valores['sobrenome'], valores['endereco'], valores['telefone'], valores['cpf'], valores['email'], valores['senha'], int(id))
+    # sql = "UPDATE `traba_db`.`tbl_cliente` SET `nome`=%s where id=%s"
+    # vlr = (valores['nome'], valores['id'])
+    # print("clienteNovo: {}".format(vlr))
+
+    mycursor.execute(sql, vlr)
+    terminaConexao()
+    return "sucesso"
+
+  except:
+    print("ERRO na EDICAO.")
+    return "ERRO na EDICAO."
+
+def editarVeiculo(valores, id):
+  print(valores)
+  try:
+    sql = "UPDATE `tbl_veiculo` SET `marca` = %s, `fabricante` = %s, `ano` = %s, `chassis` = %s, `cor` = %s WHERE `tbl_veiculo`.`id` = %s"
+    vlr = (valores['marca'], valores['fabricante'], valores['ano'], valores['chassis'], valores['cor'], int(id))
     # sql = "UPDATE `traba_db`.`tbl_cliente` SET `nome`=%s where id=%s"
     # vlr = (valores['nome'], valores['id'])
     # print("clienteNovo: {}".format(vlr))

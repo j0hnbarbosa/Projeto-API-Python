@@ -1,6 +1,7 @@
-from src.CRUD.crud import cadastrarCliente, criaBases, verificaLogin, cadastrarUsuario, recuperarSenha_verificaEmail, trocarSenha, listarClientes, listarVeiculos, cadastrarVeiculos, deletarCliente, deletarVeiculo, editarCliente
+from src.CRUD.crud import cadastrarCliente, criaBases, verificaLogin, cadastrarUsuario, recuperarSenha_verificaEmail, trocarSenha, listarClientes, listarVeiculos, cadastrarVeiculos, deletarCliente, deletarVeiculo, editarCliente, editarVeiculo
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -17,10 +18,14 @@ def cadastraCliente():
 def login():
   resu = verificaLogin(request.json)
   print(resu)
+  # with open('log.txt', 'w') as outfile:
+  #   json.dump(resu, outfile)
+  # json.dump(resu, 'log')
   return  resu if resu != None else "ERRO"
 
 @app.route('/cadastrarUsuario', methods=['POST'])
 def cadastraUsuario():
+  
   cadastrarUsuario(request.json)
   return 'sucesso'
 
@@ -51,9 +56,9 @@ def listarVeiculo():
 def editaCliente(id):
   return editarCliente(request.json, id)
 
-@app.route('/editarVeiculo', methods=['PUT'])
-def editarVeiculo():
-  return 'TEste editarVeiculo'
+@app.route('/editarVeiculo/<id>', methods=['PUT'])
+def editaVeiculo(id):
+  return editarVeiculo(request.json, id)
 
 @app.route('/deletarCliente', methods=['DELETE'])
 def deletaCliente():
