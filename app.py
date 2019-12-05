@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-# criaBases()
+criaBases()
 
 @app.route('/cadastrarCliente', methods=['POST'])
 def cadastraCliente():
